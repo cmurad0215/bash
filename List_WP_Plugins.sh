@@ -14,6 +14,7 @@ else
         echo "$wpath" > "$OUTPUT_FILE";
         echo "Plugin Name,Version,Status,Auto Update" >> "$OUTPUT_FILE";
         wp plugin list --allow-root --format=json --path=$wpath | jq -r '.[] | [.name, .version, .status, .auto_update] | @csv' >> "$OUTPUT_FILE";
+        cat "$OUTPUT_FILE";
         ((counter++));
 
     done <<< "$wp_config_paths"
