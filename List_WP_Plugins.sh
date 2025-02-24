@@ -12,8 +12,11 @@ else
         OUTPUT_FILE="$(hostname)_wordpress_plugins_$counter.csv";
         wpath="${path%/*}";
         echo "$wpath" > "$OUTPUT_FILE";
-        echo "Plugin Name,Version,Status,Auto Update" >> "$OUTPUT_FILE";
-        wp plugin list --allow-root --format=json --path=$wpath | jq -r '.[] | [.name, .version, .status, .auto_update] | @csv' >> "$OUTPUT_FILE";
+        
+        #echo "Plugin Name,Version,Status,Auto Update" >> "$OUTPUT_FILE";
+        #wp plugin list --allow-root --format=json --path=$wpath | jq -r '.[] | [.name, .version, .status, .auto_update] | @csv' >> "$OUTPUT_FILE";
+        
+        wp plugin list --allow-root --format=csv --path=$wpath >> "$OUTPUT_FILE";
         cat "$OUTPUT_FILE";
         ((counter++));
 
